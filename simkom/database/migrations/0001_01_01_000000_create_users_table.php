@@ -11,22 +11,29 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // 1. Tabel Utama Users sesuai Dokumen SIMKOM
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->id('id_user'); // Primary Key kustom sesuai Kamus Data kalian
+            $table->string('nama');
+            $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            
+            // Pilihan role lengkap sesuai kebutuhan kelompok
+            $table->enum('role', ['admin', 'pengurus', 'anggota', 'pembina'])->default('anggota');
+            
+            $table->string('status_akun')->default('aktif');
             $table->timestamps();
         });
 
+        // 2. Tabel Token Reset Password (Bantuan bawaan Laravel agar tidak error)
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
+        // 3. Tabel Sesi Login (Bantuan bawaan Laravel)
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();

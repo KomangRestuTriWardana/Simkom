@@ -2,48 +2,46 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\ProfilPengguna;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    protected $table = 'users';
+    protected $primaryKey = 'id_user';
+    public $incrementing = true; // Penting agar Laravel tahu ini auto-increment
+    protected $keyType = 'int';   // Penting karena id_user adalah bigint/integer
+
     protected $fillable = [
-        'name',
+        'nama',
+        'username',
         'email',
         'password',
+        'role',
+        'status_akun',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+
+    // TAMBAHKAN DI SINI
+    // public function getAuthIdentifierName()
+    // {
+    //     return 'username';
+    // }
+    public function profil()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasOne(ProfilPengguna::class, 'user_id');
     }
+    
 }
