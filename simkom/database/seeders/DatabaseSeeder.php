@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         // Panggil UserSeeder di sini agar datanya masuk
         $this->call([
+            OrganisasiSeeder::class,
             UserSeeder::class,
         ]);
     }

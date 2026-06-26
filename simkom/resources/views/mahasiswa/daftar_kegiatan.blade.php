@@ -1,15 +1,14 @@
 @extends('mahasiswa.layout.master')
-@section('page_title', 'Daftar Kegiatan')
+@section('page_title', 'Pendaftaran Kegiatan')
 
 @section('content')
 <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl font-extrabold text-slate-800 mb-8 tracking-tight">Pendaftaran Kegiatan</h2>
 
     <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-10 flex items-center justify-between gap-6">
         <div class="relative flex-grow max-w-xl">
             <input type="text" id="searchInput" placeholder="Cari kegiatan..." 
                    class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-400 transition text-sm">
-            <span class="absolute left-4 top-3.5 text-slate-400 text-lg">🔍</span>
+            <span class="absolute left-4 top-3.5 text-slate-400 text-lg"></span>
         </div>
         <div class="flex items-center gap-2 overflow-x-auto pb-1">
             <button onclick="filterKegiatan('Semua', this)" class="filter-btn px-5 py-2.5 bg-indigo-600 text-white rounded-full text-xs font-semibold whitespace-nowrap active-filter transition">Semua</button>

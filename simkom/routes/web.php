@@ -47,13 +47,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/mahasiswa/daftar-kegiatan', [PendaftaranKegiatanController::class, 'index'])->name('mahasiswa.kegiatan');
         Route::get('/mahasiswa/pendaftaran-kegiatan/{id}', [PendaftaranKegiatanController::class, 'showForm'])->name('kegiatan.daftar');
         Route::post('/mahasiswa/pendaftaran-kegiatan', [PendaftaranKegiatanController::class, 'store'])->name('kegiatan.simpan');
-        Route::get('/mahasiswa/pendaftaran-berhasil', function () { return view('mahasiswa.pendaftaran_berhasil');})->name('kegiatan.berhasil'); //baru
+        Route::get('/mahasiswa/pendaftaran-kegiatan-berhasil', function () { return view('mahasiswa.pendaftaran_berhasil'); })->name('kegiatan.berhasil');
+        // Route::get('/mahasiswa/pendaftaran-berhasil', function () { return view('mahasiswa.pendaftaran_berhasil');})->name('kegiatan.berhasil'); //baru
         
         // Rute Anggota
         // Rute Anggota
         Route::get('/mahasiswa/pendaftaran-anggota', [App\Http\Controllers\AnggotaController::class, 'index'])->name('mahasiswa.anggota');
         Route::post('/mahasiswa/pendaftaran-anggota', [App\Http\Controllers\AnggotaController::class, 'store'])->name('anggota.store');
-        Route::get('/mahasiswa/pendaftaran-berhasil', function () {return view('mahasiswa.pendaftaran_berhasil');})->name('anggota.berhasil');
+        Route::get('/mahasiswa/pendaftaran-anggota-berhasil/{id_organisasi}', [App\Http\Controllers\AnggotaController::class, 'sukses'])->name('anggota.berhasil');
         
         //rute riwayat aktivitas
         // Route::get('/mahasiswa/riwayat-aktivitas', [MahasiswaController::class, 'riwayat'])->name('mahasiswa.riwayat');

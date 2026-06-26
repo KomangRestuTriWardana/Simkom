@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggota;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AnggotaController extends Controller
 {
@@ -51,12 +52,27 @@ class AnggotaController extends Controller
                 'tanggal_bergabung' => now()->format('Y-m-d'),
             ]);
             
-            // Mengarahkan ke halaman sukses yang sudah kita buat
-            return redirect()->route('anggota.berhasil');
+            // Mengarahkan ke halaman sukses dengan membawa id_organisasi sebagai parameter URL
+            return redirect()->route('anggota.berhasil', ['id_organisasi' => $request->id_organisasi]);
             
         } catch (\Exception $e) {
             // Jika gagal, tampilkan pesan error-nya
             dd($e->getMessage()); 
         }
+    }
+
+    // Fungsi Baru untuk Mengambil Data Organisasi Langsung dari Database
+    public function sukses($id_organisasi)
+    {
+        // Mencari data organisasi berdasarkan id_organisasi di database
+        $organisasi = DB::table('organisasis')->where('id_organisasi', $id_organisasi)->first();
+
+        // Jika data organisasi tidak ditemukan di database, gagalkan dengan error 404
+        if (!$organisasi) {
+            abort(404);
+        }
+
+        // Mengirimkan variabel $organisasi ke view pendaftaran_anggotaberhasil
+        return view('mahasiswa.pendaftaran_anggotaberhasil', compact('organisasi'));
     }
 }
