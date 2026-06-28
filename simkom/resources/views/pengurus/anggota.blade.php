@@ -77,6 +77,7 @@
          class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4"
          x-cloak>
         <div @click.away="openModal = false" class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl flex overflow-hidden h-[600px] relative">
+            
             <div class="w-1/3 p-8 border-r border-slate-100 flex flex-col items-center text-center">
                 <div class="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold text-3xl mb-4" x-text="selectedAnggota.nama_anggota ? selectedAnggota.nama_anggota.charAt(0).toUpperCase() : ''"></div>
                 <h3 class="font-bold text-lg text-slate-800" x-text="selectedAnggota.nama_anggota"></h3>
@@ -87,6 +88,7 @@
                     <div><p class="text-[10px] text-slate-400 uppercase font-bold">Nomor HP</p><p x-text="selectedAnggota.nomor_hp"></p></div>
                 </div>
             </div>
+
             <div class="w-2/3 flex flex-col relative">
                 <div class="p-6 border-b border-slate-100 flex justify-between items-center">
                     <h4 class="font-bold text-slate-800">Pratinjau Dokumen</h4>
@@ -94,12 +96,42 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
+                
                 <div class="flex-1 flex flex-col items-center justify-center bg-slate-50 p-12 text-center">
                     <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 mb-4">📄</div>
                     <p class="font-bold text-slate-700" x-text="selectedAnggota.dokumen_pendukung"></p>
                     <p class="text-sm text-slate-500 mb-6">Preview PDF tidak tersedia di browser.</p>
                     <a :href="'/storage/dokumen/' + selectedAnggota.dokumen_pendukung" target="_blank" class="px-6 py-3 bg-[#203184] text-white rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-[#1a2870]">⬇ Unduh Dokumen</a>
                 </div>
+
+                <div class="p-4 border-t border-slate-100 bg-white flex justify-between items-center">
+                    <div>
+                        <template x-if="selectedAnggota.status_anggota == 'Aktif'">
+                            <form :action="'{{ route('pengurus.anggota.update', ['id' => 'TARGET_ID']) }}'.replace('TARGET_ID', selectedAnggota.id_anggota)" method="POST">
+                                @csrf
+                                <input type="hidden" name="status" value="NonAktif">
+                                <button type="submit" class="px-4 py-2 bg-red-50 text-red-600 border border-red-100 rounded-xl text-xs font-bold hover:bg-red-100 transition-all flex items-center gap-1">
+                                    Nonaktifkan Anggota
+                                </button>
+                            </form>
+                        </template>
+
+                        <template x-if="selectedAnggota.status_anggota == 'NonAktif'">
+                            <form :action="'{{ route('pengurus.anggota.update', ['id' => 'TARGET_ID']) }}'.replace('TARGET_ID', selectedAnggota.id_anggota)" method="POST">
+                                @csrf
+                                <input type="hidden" name="status" value="Aktif">
+                                <button type="submit" class="px-4 py-2 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-xl text-xs font-bold hover:bg-emerald-100 transition-all flex items-center gap-1">
+                                    Aktifkan Kembali Anggota
+                                </button>
+                            </form>
+                        </template>
+                    </div>
+
+                    <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                        Status: <span x-text="selectedAnggota.status_anggota" :class="selectedAnggota.status_anggota == 'Pending' ? 'text-amber-500' : (selectedAnggota.status_anggota == 'Aktif' ? 'text-emerald-500' : 'text-red-500')"></span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

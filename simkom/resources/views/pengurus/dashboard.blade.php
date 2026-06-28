@@ -15,9 +15,9 @@
     @php
         $stats = [
             ['title' => 'TOTAL ANGGOTA', 'value' => '42', 'sub' => '↑ +9 bulan ini'],
-            ['title' => 'KEGIATAN AKTIF', 'value' => '3', 'sub' => ''],
-            ['title' => 'SALDO KAS', 'value' => 'Rp 4,2 jt', 'sub' => '↑ +Rp 1,1 jt'],
-            ['title' => 'PENDAFTAR BARU', 'value' => '5', 'sub' => '↓ Menunggu review']
+            ['title' => 'KEGIATAN AKTIF', 'value' => '5', 'sub' => ''],
+            ['title' => 'SALDO KAS', 'value' => 'Rp 12.7 jt', 'sub' => '↑ +Rp 1,1 jt'],
+            ['title' => 'PENDAFTAR BARU', 'value' => '4', 'sub' => '↓ Menunggu review']
         ];
     @endphp
 

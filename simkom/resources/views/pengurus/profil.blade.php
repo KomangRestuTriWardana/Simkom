@@ -3,35 +3,49 @@
 @section('page_title', 'Profil Organisasi')
 
 @section('content')
-<div class="max-w-5xl mx-auto pb-10"> <form action="#" method="POST" class="space-y-6">
+<div class="max-w-5xl mx-auto pb-10"> 
+    
+    @if(session('success'))
+        <div class="mb-6 p-4 bg-green-100 border border-green-200 text-green-700 rounded-xl font-semibold text-sm">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <form action="{{ route('pengurus.profil.update') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         
         <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
             <h3 class="text-sm font-bold text-blue-900 mb-6 uppercase tracking-wider">Informasi Dasar</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                
                 <div class="space-y-2">
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Nama Organisasi</label>
-                    <input type="text" name="nama" value="Himpunan Mahasiswa Informatika" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all">
+                    <input type="text" name="nama_organisasi" value="{{ old('nama_organisasi', $organisasi->nama_organisasi) }}" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all">
                 </div>
+                
                 <div class="space-y-2">
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Singkatan</label>
-                    <input type="text" name="singkatan" value="HMIF" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all">
+                    <input type="text" name="singkatan" value="{{ old('singkatan', $organisasi->singkatan) }}" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all">
                 </div>
+                
                 <div class="space-y-2">
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Periode Kepengurusan</label>
-                    <input type="text" name="periode" value="2024/2025" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all">
+                    <input type="text" name="periode_kepengurusan" value="{{ old('periode_kepengurusan', $organisasi->periode_kepengurusan) }}" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all">
                 </div>
+                
                 <div class="space-y-2">
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Dosen Pembimbing</label>
-                    <input type="text" name="pembimbing" value="Dr. Hendra Wijaya, S.Kom., M.T." class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all">
+                    <input type="text" name="dosen_pembimbing" value="{{ old('dosen_pembimbing', $organisasi->dosen_pembimbing) }}" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all">
                 </div>
+                
                 <div class="space-y-2">
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Email Organisasi</label>
-                    <input type="email" name="email" value="hmif@student.univ.ac.id" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all">
+                    <input type="email" name="email_organisasi" value="{{ old('email_organisasi', $organisasi->email_organisasi) }}" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all">
                 </div>
+                
                 <div class="space-y-2">
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Nomor Kontak</label>
-                    <input type="text" name="kontak" value="0812-3456-7890" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all">
+                    <input type="text" name="nomor_kontak" value="{{ old('nomor_kontak', $organisasi->nomor_kontak) }}" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all">
                 </div>
             </div>
         </div>
@@ -41,11 +55,11 @@
             <div class="space-y-6">
                 <div class="space-y-2">
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Visi</label>
-                    <textarea name="visi" rows="3" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all resize-none"></textarea>
+                    <textarea name="visi" rows="3" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all resize-none">{{ old('visi', $organisasi->visi) }}</textarea>
                 </div>
                 <div class="space-y-2">
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Misi</label>
-                    <textarea name="misi" rows="5" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all resize-none"></textarea>
+                    <textarea name="misi" rows="5" class="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all resize-none">{{ old('misi', $organisasi->misi) }}</textarea>
                     <p class="text-[10px] text-slate-400 italic">Pisahkan setiap poin misi dengan baris baru.</p>
                 </div>
             </div>
@@ -58,10 +72,10 @@
                     <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                 </div>
                 <div class="text-center">
-                    <p class="text-sm font-bold text-slate-700">struktur-organisasi-2024.pdf</p>
-                    <p class="text-[10px] text-slate-400 uppercase">PDF atau PNG, maks. 10MB</p>
+                    <p class="text-sm font-bold text-slate-700">{{ $organisasi->struktur_organisasi ?? 'Belum ada file diupload' }}</p>
+                    <p class="text-[10px] text-slate-400 uppercase">PDF atau Gambar, maks. 10MB</p>
                 </div>
-                <button type="button" class="text-xs font-bold text-blue-600 hover:underline">Ganti File</button>
+                <input type="file" name="struktur_organisasi" class="text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
             </div>
         </div>
 

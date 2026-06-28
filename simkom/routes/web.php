@@ -75,9 +75,13 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['cek_role:pengurus'])->group(function () {
         Route::get('/pengurus/dashboard', [DashboardController::class, 'index'])->name('pengurus.dashboard');
         Route::get('/profil', [ProfilController::class, 'index'])->name('pengurus.profil');
+        Route::post('/profil/update', [ProfilController::class, 'update'])->name('pengurus.profil.update');
         Route::get('/anggota', [AnggotaController::class, 'index'])->name('pengurus.anggota');
         Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('pengurus.kegiatan');
         Route::get('/laporan', [LaporanController::class, 'index'])->name('pengurus.laporan');
+        Route::post('/laporan/store', [LaporanController::class, 'store'])->name('pengurus.laporan.store');
+        Route::get('/laporan/export-pdf', [LaporanController::class, 'exportPdf'])->name('pengurus.laporan.export.pdf');
+        Route::get('/laporan/export-excel', [LaporanController::class, 'exportExcel'])->name('pengurus.laporan.export.excel');
         Route::get('/anggota', [ManajemenAnggotaController::class, 'index'])->name('pengurus.anggota');
         Route::post('/anggota/{id}/update-status', [ManajemenAnggotaController::class, 'updateStatus'])->name('pengurus.anggota.update');
         Route::post('/anggota/{id}/update-status', [ManajemenAnggotaController::class, 'updateStatus'])->name('pengurus.anggota.update');
