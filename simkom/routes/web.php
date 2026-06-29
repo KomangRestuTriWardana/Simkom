@@ -63,11 +63,13 @@ Route::middleware(['auth'])->group(function () {
 
     // Jalur Admin
     Route::middleware(['cek_role:admin'])->group(function () {
-        Route::get('/dashboard', [App\Http\Controllers\admin\DashboardController::class, 'index'])->name('admin.dashboard');
-        Route::get('/pengguna', [App\Http\Controllers\admin\UserController::class, 'index'])->name('admin.pengguna');
-        Route::get('/profil', [App\Http\Controllers\admin\ProfilController::class, 'index'])->name('admin.profil');
+        Route::get('/admin/dashboard', [App\Http\Controllers\admin\DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/admin/pengguna', [App\Http\Controllers\admin\UserController::class, 'index'])->name('admin.pengguna');
+        Route::put('/pengguna/{id}/update-role', [App\Http\Controllers\admin\UserController::class, 'updateRole'])->name('admin.pengguna.updateRole');
+        Route::put('/pengguna/{id}/suspend', [App\Http\Controllers\admin\UserController::class, 'suspend'])->name('admin.pengguna.suspend');
+        Route::get('/admin/profil', [App\Http\Controllers\admin\ProfilController::class, 'index'])->name('admin.profil');
 });
-    });
+    });         
 
 
 

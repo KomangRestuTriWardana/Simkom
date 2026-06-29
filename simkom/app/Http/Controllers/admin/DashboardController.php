@@ -3,21 +3,19 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Organisasi; // Sesuaikan dengan nama model Anda
-use App\Models\User;       // Sesuaikan dengan nama model Anda
-use App\Models\Kegiatan;   // Sesuaikan dengan nama model Anda
+use App\Models\User;
+use App\Models\Kegiatan;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Pastikan ini TIDAK dikomentari agar $data tersedia
-    $data = [
-        // 'totalOrganisasi'  => \App\Models\Organisasi::count(),
-        'totalPengguna'    => \App\Models\User::where('role', 'anggota')->count(),
-        'kegiatanAktif'    => \App\Models\Kegiatan::where('status_kegiatan', 'Terbuka')->count(),
-        'totalUserHariIni' => \App\Models\User::whereDate('created_at', now()->format('Y-m-d'))->count(),
-    ];
+        $data = [
+            'totalPengguna'    => User::where('role', 'anggota')->count(),
+            'kegiatanAktif'    => Kegiatan::where('status_kegiatan', 'Terbuka')->count(),
+            'totalUserHariIni' => User::whereDate('created_at', now()->format('Y-m-d'))->count(),
+            'persentaseUser'   => 75, // Data statis untuk visual grafik
+        ];
 
         return view('admin.dashboard', compact('data'));
     }
