@@ -8,6 +8,7 @@ class Organisasi extends Model
 {
     protected $table = 'organisasis';
     protected $primaryKey = 'id_organisasi';
+
     protected $fillable = [
         'nama_organisasi',
         'singkatan',
@@ -18,5 +19,6 @@ class Organisasi extends Model
         'visi',
         'misi',
         'struktur_organisasi',
+        'status', // Menambahkan kolom status agar bisa diisi (CRUD)
     ];
 }

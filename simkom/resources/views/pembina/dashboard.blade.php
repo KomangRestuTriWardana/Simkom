@@ -25,11 +25,11 @@
     </div>
     <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
         <p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Kegiatan Aktif</p>
-        <h2 class="text-2xl font-bold text-slate-800 mt-1">3</h2>
+        <h2 class="text-2xl font-bold text-slate-800 mt-1">6</h2>
     </div>
     <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
         <p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Saldo Kas</p>
-        <h2 class="text-2xl font-bold text-slate-800 mt-1">Rp 5,27 jt</h2>
+        <h2 class="text-2xl font-bold text-slate-800 mt-1">Rp 12,7 jt</h2>
     </div>
     <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
         <p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Tren Keuangan</p>

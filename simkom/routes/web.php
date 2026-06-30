@@ -68,6 +68,10 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/pengguna/{id}/update-role', [App\Http\Controllers\admin\UserController::class, 'updateRole'])->name('admin.pengguna.updateRole');
         Route::put('/pengguna/{id}/suspend', [App\Http\Controllers\admin\UserController::class, 'suspend'])->name('admin.pengguna.suspend');
         Route::get('/admin/profil', [App\Http\Controllers\admin\ProfilController::class, 'index'])->name('admin.profil');
+        Route::patch('/admin/profil/{id}/update-status', [App\Http\Controllers\admin\ProfilController::class, 'updateStatus'])->name('admin.profil.update-status');
+        Route::put('/admin/profil/update', [App\Http\Controllers\admin\ProfilController::class, 'update'])->name('admin.profil.update');
+        Route::post('/admin/profil/store', [App\Http\Controllers\admin\ProfilController::class, 'store'])->name('admin.profil.store');
+        Route::delete('/admin/profil/delete/{id}', [App\Http\Controllers\admin\ProfilController::class, 'destroy'])->name('admin.profil.delete');
 });
     });         
 
